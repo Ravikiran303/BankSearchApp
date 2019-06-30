@@ -1,5 +1,5 @@
 import React from "react";
-import Banks from "./Components/Banks";
+import Banks from "./Components/Banks/Banks";
 
 function App() {
   return (
