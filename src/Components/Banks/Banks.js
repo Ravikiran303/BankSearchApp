@@ -4,6 +4,21 @@ import axios from "axios";
 import "react-table/react-table.css";
 
 export class Banks extends Component {
+  state = {
+    banks: []
+  };
+  componentDidMount() {
+    axios
+      .get("https://vast-shore-74260.herokuapp.com/banks?city=MUMBAI")
+      .then(response => {
+        const banks = response.data;
+        this.setState({ banks });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
   render() {
     const colums = [
       {
@@ -39,7 +54,7 @@ export class Banks extends Component {
         accessor: "bank_name"
       }
     ];
-    return <ReactTable columns={colums} />;
+    return <ReactTable columns={colums} data={this.state.banks} />;
   }
 }
 
