@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Banks from "./Components/Banks/Banks";
 import { SeachBar } from "./Components/SearchBar/SeachBar";
-import axios from "axios";
 import Cities from "./Components/Cities/Cities";
 import "./App.css";
 
@@ -11,23 +10,51 @@ class App extends Component {
     filteredBanks: [],
     loading: false
   };
-  componentDidMount = () => {
-    this.filterCities("BANGLORE");
+  componentDidMount = async () => {
+    await this.filterCities("MUMBAI");
   };
 
-  filterCities = value => {
+  fetchData = async value => {
+    const cacheName = "my-website-cache";
+    const response = await fetch(
+      "https://vast-shore-74260.herokuapp.com/banks?city=" + `${value}`
+    );
+    const data = await response;
+    const cache = await caches.open(cacheName);
+    return cache.put(value, data);
+  };
+
+  getDataFromCache = async value => {
     this.setState({ loading: true });
-    axios
-      .get("https://vast-shore-74260.herokuapp.com/banks?city=" + `${value}`)
-      .then(response => {
-        const banks = response.data;
-        this.setState({ banks: banks, filteredBanks: banks, loading: false });
-      })
-
-      .catch(err => {
-        console.log(err);
-      });
+    const cacheName = "my-website-cache";
+    const cache = await caches.open(cacheName);
+    return await cache.match(value);
   };
+
+  saveData = async banks => {
+    const data = await banks.json();
+
+    this.setState({
+      filteredBanks: data,
+      loading: false,
+      banks: data
+    });
+  };
+
+  filterCities = async value => {
+    this.setState({ loading: true, filteredBanks: [] });
+    const bank = await this.getDataFromCache(value);
+
+    if (bank) {
+      await this.saveData(bank);
+      await this.fetchData(value);
+    } else {
+      await this.fetchData(value);
+      const bank = await this.getDataFromCache(value);
+      await this.saveData(bank);
+    }
+  };
+
   searchKeywordChange = search => {
     const filtered = this.state.banks.filter(function(bank, index, arr) {
       let {

@@ -5,11 +5,10 @@ export class FavoriteIcon extends Component {
   state = {
     favoriteIcon: ls.get(this.props.Bank_ifsc)
       ? "star icon"
-      : "star outline icon",
-    favoriteBanks: []
+      : "star outline icon"
   };
+
   render() {
-    console.log(this.props.Bank_ifsc);
     return (
       <div>
         <i
@@ -20,7 +19,7 @@ export class FavoriteIcon extends Component {
                 ls.remove(this.props.Bank_ifsc, false);
                 return { favoriteIcon: "star outline icon" };
               }
-              this.state.favoriteBanks = ls.set(this.props.Bank_ifsc, true);
+              ls.set(this.props.Bank_ifsc, true);
               return { favoriteIcon: "star icon" };
             });
           }}

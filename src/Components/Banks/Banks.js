@@ -9,7 +9,6 @@ export class Banks extends Component {
       Header: "Favorite",
       accessor: "favorite",
       Cell: props => {
-        console.log(props.original.ifsc);
         return <FavoriteIcon Bank_ifsc={props.original.ifsc} />;
       }
     },

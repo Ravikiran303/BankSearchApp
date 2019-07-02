@@ -21,8 +21,8 @@ export class Cities extends Component {
           value={this.state.value}
           options={cities}
           onChange={e => {
-            this.props.filterCities(e.value);
             this.setState({ value: e.value });
+            this.props.filterCities(e.value);
           }}
           placeholder="Select City"
         />
