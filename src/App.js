@@ -9,12 +9,16 @@ class App extends Component {
   state = {
     banks: [],
     filteredBanks: [],
-    loading: true
+    loading: false
+  };
+  componentDidMount = () => {
+    this.filterCities("MUMBAI");
   };
 
-  async componentDidMount() {
+  filterCities = value => {
+    this.setState({ loading: true });
     axios
-      .get("https://vast-shore-74260.herokuapp.com/banks?city=MUMBAI")
+      .get("https://vast-shore-74260.herokuapp.com/banks?city=" + `${value}`)
       .then(response => {
         const banks = response.data;
         this.setState({ banks: banks, filteredBanks: banks, loading: false });
@@ -23,13 +27,6 @@ class App extends Component {
       .catch(err => {
         console.log(err);
       });
-  }
-  filterCities = value => {
-    const filtered = this.state.banks.filter(function(bank, index, arr) {
-      let { city = "" } = bank;
-      return city.toLowerCase() === value.value.toLowerCase();
-    });
-    this.setState({ filtered_arr: filtered });
   };
   searchKeywordChange = search => {
     const filtered = this.state.banks.filter(function(bank, index, arr) {
