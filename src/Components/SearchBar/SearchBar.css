@@ -1,6 +1,5 @@
 .input {
-  width: 20%;
-  margin: auto;
-  margin-bottom: 10px;
-  border-radius: 5px;
+  width: 200px;
+  height: 40px;
+  border-radius: 2px;
 }
