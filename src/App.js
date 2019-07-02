@@ -12,7 +12,7 @@ class App extends Component {
     loading: false
   };
   componentDidMount = () => {
-    this.filterCities("MUMBAI");
+    this.filterCities("BANGLORE");
   };
 
   filterCities = value => {

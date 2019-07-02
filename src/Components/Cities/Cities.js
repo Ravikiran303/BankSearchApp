@@ -5,12 +5,12 @@ import "../Cities/Cities.css";
 
 export class Cities extends Component {
   state = {
-    value: "MUMBAI"
+    value: "BANGLORE"
   };
   render() {
     const cities = [
-      "MUMBAI",
       "BANGLORE",
+      "MUMBAI",
       "HYDERABAD",
       "CHENNAI",
       "GREATER MUMBAI"
