@@ -38,7 +38,13 @@ export class Banks extends Component {
         accessor: "bank_name"
       }
     ];
-    return <ReactTable columns={colums} data={this.props.banks} />;
+    return (
+      <ReactTable
+        columns={colums}
+        data={this.props.banks}
+        loading={this.props.loading}
+      />
+    );
   }
 }
 
