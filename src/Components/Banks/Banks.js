@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
+import { Link } from "react-router-dom";
 import FavoriteIcon from "../Favorite/FavoriteIcon";
 
 export class Banks extends Component {
@@ -42,7 +43,19 @@ export class Banks extends Component {
     },
     {
       Header: "BankName",
-      accessor: "bank_name"
+      accessor: "bank_name",
+      Cell: props => {
+        return (
+          <Link
+            to={{
+              pathname: `/BankDetails/${props.original.bank_name}`,
+              state: { data: props.original }
+            }}
+          >
+            {props.original.bank_name}
+          </Link>
+        );
+      }
     }
   ];
 
