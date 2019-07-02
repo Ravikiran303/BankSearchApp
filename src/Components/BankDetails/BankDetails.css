@@ -1,0 +1,26 @@
+.details {
+  width: 600px;
+  margin-left: 450px;
+  margin-top: 100px;
+  position: absolute;
+}
+.item {
+  height: 40px;
+  display: flex;
+  width: 600px;
+  padding-top: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: cornflowerblue;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  box-shadow: 2px;
+  color: white;
+  justify-content: space-evenly;
+  font-family: "Times New Roman", Times, serif;
+}
+
+label {
+  font-weight: bold;
+  width: 300px;
+}
