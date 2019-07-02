@@ -4,20 +4,25 @@ import "react-dropdown/style.css";
 import "../Cities/Cities.css";
 
 export class Cities extends Component {
+  state = {
+    value: "MUMBAI"
+  };
   render() {
     const cities = [
       "MUMBAI",
       "BANGLORE",
       "HYDERABAD",
-      "MAHARASTRA",
+      "CHENNAI",
       "GREATER MUMBAI"
     ];
     return (
       <div className="dropdown">
         <Dropdown
+          value={this.state.value}
           options={cities}
           onChange={e => {
-            this.props.filterCities(e);
+            this.props.filterCities(e.value);
+            this.setState({ value: e.value });
           }}
           placeholder="Select City"
         />
