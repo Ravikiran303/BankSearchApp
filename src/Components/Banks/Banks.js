@@ -40,6 +40,8 @@ export class Banks extends Component {
     ];
     return (
       <ReactTable
+        minRows={10}
+        defaultPageSize={10}
         columns={colums}
         data={this.props.banks}
         loading={this.props.loading}
